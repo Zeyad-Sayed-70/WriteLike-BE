@@ -1,0 +1,32 @@
+# Banned in the Domain layer — every line is a COMPILE ERROR (RS0030), not a code-review wish.
+# NOTE: BannedApiAnalyzers only supports T:/M:/P: symbol IDs. It does NOT support namespace bans —
+# so we ban the concrete gateway types instead. Lines for packages Domain does not reference are
+# PREEMPTIVE: they bite the moment someone adds that package.
+
+# HTTP (System.Net.Http is in the base class library — this ban is always live)
+T:System.Net.Http.HttpClient;Domain does no I/O. Outbound calls are port implementations in Infrastructure/Ai.
+T:System.Net.Http.HttpClientHandler;Domain does no I/O.
+
+# Serialization
+T:System.Text.Json.JsonSerializer;Domain is not serialized from the inside. Mapping lives in Application/Infrastructure.
+T:System.Text.Json.JsonSerializerOptions;Domain is not serialized from the inside.
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.
+
+# Persistence (preemptive)
+T:Microsoft.EntityFrameworkCore.DbContext;Domain is persistence-ignorant. EF Core lives in Infrastructure.
+T:Microsoft.EntityFrameworkCore.DbSet`1;Domain is persistence-ignorant. EF Core lives in Infrastructure.
+T:Microsoft.EntityFrameworkCore.DbContextOptions;Domain is persistence-ignorant.
+
+# Redis (preemptive)
+T:StackExchange.Redis.ConnectionMultiplexer;Counters/cache live behind ILikeCounterService in Infrastructure.
+T:StackExchange.Redis.IDatabase;Redis lives in Infrastructure.
+
+# Framework abstractions (preemptive)
+T:Microsoft.Extensions.DependencyInjection.IServiceCollection;Domain has no DI registration — wiring is Composition's job.
+T:Microsoft.Extensions.Logging.ILogger;Domain has no logging dependency.
+T:Microsoft.Extensions.Options.IOptions;No options binding in Domain.
+T:Microsoft.Extensions.Configuration.IConfiguration;No configuration in Domain.
+
+# ASP.NET (preemptive)
+T:Microsoft.AspNetCore.Http.IHttpContextAccessor;No HTTP context in Domain.

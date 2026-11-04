@@ -1,0 +1,18 @@
+# Banned in the AI pipeline — persistence goes through Application ports, not direct DB access.
+# HttpClient is ALLOWED here: the OpenCode runtime is called over HTTP via IHttpClientFactory.
+
+# Persistence (preemptive)
+T:Microsoft.EntityFrameworkCore.DbContext;The AI pipeline must not touch persistence. Save via Application ports.
+T:Microsoft.EntityFrameworkCore.DbSet`1;Save via Application ports.
+
+# Redis (preemptive)
+T:StackExchange.Redis.ConnectionMultiplexer;Ephemeral session state lives in Infrastructure, accessed via ports.
+T:StackExchange.Redis.IDatabase;Redis lives in Infrastructure.
+
+# Delivery (preemptive)
+T:Microsoft.AspNetCore.Http.HttpContext;No HTTP context in the pipeline.
+T:Microsoft.AspNetCore.Mvc.ControllerBase;Delivery lives in Api.
+
+# Serialization
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.

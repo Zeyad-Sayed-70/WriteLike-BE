@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Integration tests run against real Postgres + Redis via Testcontainers.
+    Add packages here when the first real integration test lands:
+      Testcontainers.PostgreSql, Testcontainers.Redis, Microsoft.AspNetCore.Mvc.Testing
+  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WriteLike.Domain\WriteLike.Domain.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Application\WriteLike.Application.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Infrastructure\WriteLike.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Api\WriteLike.Api.csproj" />
+  </ItemGroup>
+
+</Project>

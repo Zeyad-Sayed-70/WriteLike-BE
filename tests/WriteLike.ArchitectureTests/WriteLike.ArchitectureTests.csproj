@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- The executable architecture rulebook. Protected by CODEOWNERS — humans only. -->
+  <ItemGroup>
+    <PackageReference Include="TngTech.ArchUnitNET" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnit" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WriteLike.Domain\WriteLike.Domain.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Application\WriteLike.Application.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Ai\WriteLike.Ai.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Infrastructure\WriteLike.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Composition\WriteLike.Composition.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Api\WriteLike.Api.csproj" />
+  </ItemGroup>
+
+</Project>

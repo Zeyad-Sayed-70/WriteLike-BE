@@ -1,0 +1,35 @@
+#nullable enable
+static WriteLike.Domain.Ai.GenerationSessionId.New() -> WriteLike.Domain.Ai.GenerationSessionId
+static WriteLike.Domain.Personas.PersonaId.New() -> WriteLike.Domain.Personas.PersonaId
+static WriteLike.Domain.Texts.TextId.New() -> WriteLike.Domain.Texts.TextId
+static WriteLike.Domain.Users.UserId.New() -> WriteLike.Domain.Users.UserId
+WriteLike.Domain.Ai.GenerationSessionId.GenerationSessionId() -> void
+WriteLike.Domain.Ai.GenerationSessionId.GenerationSessionId(System.Guid Value) -> void
+WriteLike.Domain.Ai.GenerationSessionId.Value.init -> void
+WriteLike.Domain.AssemblyReference
+WriteLike.Domain.Ai.GenerationSessionId
+WriteLike.Domain.Ai.GenerationSessionId.Value.get -> System.Guid
+WriteLike.Domain.AssemblyReference.AssemblyReference() -> void
+WriteLike.Domain.Personas.Persona
+WriteLike.Domain.Personas.Persona.Persona(WriteLike.Domain.Personas.PersonaId id, string! name, WriteLike.Domain.Personas.PersonaKind kind) -> void
+WriteLike.Domain.Personas.Persona.Id.get -> WriteLike.Domain.Personas.PersonaId
+WriteLike.Domain.Personas.Persona.Name.get -> string!
+WriteLike.Domain.Personas.Persona.Kind.get -> WriteLike.Domain.Personas.PersonaKind
+WriteLike.Domain.Personas.PersonaId
+WriteLike.Domain.Personas.PersonaId.PersonaId() -> void
+WriteLike.Domain.Personas.PersonaId.PersonaId(System.Guid Value) -> void
+WriteLike.Domain.Personas.PersonaId.Value.get -> System.Guid
+WriteLike.Domain.Personas.PersonaId.Value.init -> void
+WriteLike.Domain.Personas.PersonaKind
+WriteLike.Domain.Personas.PersonaKind.Singer = 2 -> WriteLike.Domain.Personas.PersonaKind
+WriteLike.Domain.Personas.PersonaKind.Writer = 1 -> WriteLike.Domain.Personas.PersonaKind
+WriteLike.Domain.Texts.TextId
+WriteLike.Domain.Texts.TextId.TextId() -> void
+WriteLike.Domain.Texts.TextId.TextId(System.Guid Value) -> void
+WriteLike.Domain.Texts.TextId.Value.get -> System.Guid
+WriteLike.Domain.Texts.TextId.Value.init -> void
+WriteLike.Domain.Users.UserId
+WriteLike.Domain.Users.UserId.UserId() -> void
+WriteLike.Domain.Users.UserId.UserId(System.Guid Value) -> void
+WriteLike.Domain.Users.UserId.Value.get -> System.Guid
+WriteLike.Domain.Users.UserId.Value.init -> void

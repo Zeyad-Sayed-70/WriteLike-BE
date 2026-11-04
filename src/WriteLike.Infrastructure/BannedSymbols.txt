@@ -1,0 +1,10 @@
+# Banned in Infrastructure — it is a library of port implementations, not a delivery layer.
+# SignalR hubs live in Api; Infrastructure provides the fan-out machinery behind ports.
+# IServiceCollection is ALLOWED here (the AddInfrastructure extension needs it).
+
+T:Microsoft.AspNetCore.Mvc.ControllerBase;No controllers in Infrastructure. Delivery lives in Api.
+T:Microsoft.AspNetCore.Http.HttpContext;No HTTP context in Infrastructure.
+T:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder;Endpoint mapping lives in Api.
+T:Microsoft.AspNetCore.SignalR.Hub;Hubs live in Api; Infrastructure provides the fan-out machinery behind ports.
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.

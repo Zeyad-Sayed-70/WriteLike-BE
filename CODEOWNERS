@@ -1,0 +1,20 @@
+# These files are the enforcement machinery: AI agents can propose changes,
+# but a human MUST review them before merge (set up branch protection to enforce this).
+
+* @zeyad/architects
+
+# Guard files — human approval required for every change
+/Directory.Build.props @zeyad/architects
+/Directory.Packages.props @zeyad/architects
+/nuget.config @zeyad/architects
+/.editorconfig @zeyad/architects
+/AGENTS.md @zeyad/architects
+/CLAUDE.md @zeyad/architects
+/CODEOWNERS @zeyad/architects
+/.github/ @zeyad/architects
+/build/ @zeyad/architects
+/tests/WriteLike.ArchitectureTests/ @zeyad/architects
+WriteLike.slnx @zeyad/architects
+**/BannedSymbols.txt @zeyad/architects
+**/PublicAPI.Shipped.txt @zeyad/architects
+**/PublicAPI.Unshipped.txt @zeyad/architects

@@ -1,0 +1,30 @@
+<Project>
+
+  <!--
+    Central Package Management: ALL NuGet versions live in this one file.
+    Projects declare PackageReference WITHOUT Version. Protected by CODEOWNERS.
+    AI agents: adding a package means editing this file, which triggers human review.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Analyzers (wired in Directory.Build.props / per-project csproj) -->
+    <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.4" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.3.4" />
+
+    <!-- Composition / DI wiring -->
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
+
+    <!-- Architecture tests -->
+    <PackageVersion Include="TngTech.ArchUnitNET" Version="0.13.5" />
+    <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.13.5" />
+
+    <!-- Unit test harness -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>

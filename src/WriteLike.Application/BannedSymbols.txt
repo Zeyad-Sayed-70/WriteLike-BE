@@ -1,0 +1,27 @@
+# Banned in Application — use cases talk to PORTS defined here; implementations live in Infrastructure/Ai.
+# Lines for packages Application does not reference are PREEMPTIVE: they bite when the package is added.
+
+# HTTP
+T:System.Net.Http.HttpClient;Outbound HTTP is a port-implementation concern (Infrastructure/Ai only).
+T:System.Net.Http.HttpClientHandler;Outbound HTTP is a port-implementation concern (Infrastructure/Ai only).
+
+# Persistence (preemptive)
+T:Microsoft.EntityFrameworkCore.DbContext;Application defines ports (IPersonaRepository...). EF Core lives in Infrastructure.
+T:Microsoft.EntityFrameworkCore.DbSet`1;EF Core lives in Infrastructure.
+
+# Redis (preemptive)
+T:StackExchange.Redis.ConnectionMultiplexer;Counters/cache are behind ILikeCounterService etc. Redis lives in Infrastructure.
+T:StackExchange.Redis.IDatabase;Redis lives in Infrastructure.
+
+# ASP.NET delivery (preemptive)
+T:Microsoft.AspNetCore.Http.HttpContext;Delivery lives in Api.
+T:Microsoft.AspNetCore.Mvc.ControllerBase;Delivery lives in Api.
+T:Microsoft.AspNetCore.SignalR.Hub;SignalR hubs live in Api.
+T:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder;Minimal-API endpoints live in Api.
+
+# DI (preemptive)
+T:Microsoft.Extensions.DependencyInjection.IServiceCollection;Application has no DI registration — that is Composition's job.
+
+# Serialization
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.

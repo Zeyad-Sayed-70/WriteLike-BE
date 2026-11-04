@@ -1,0 +1,4 @@
+# Banned in Composition — it is DI wiring only, and may legitimately see all projects.
+
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.

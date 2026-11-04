@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/WriteLike.Ai/WriteLike.Ai.csproj" />
+    <Project Path="src/WriteLike.Api/WriteLike.Api.csproj" />
+    <Project Path="src/WriteLike.Application/WriteLike.Application.csproj" />
+    <Project Path="src/WriteLike.Composition/WriteLike.Composition.csproj" />
+    <Project Path="src/WriteLike.Domain/WriteLike.Domain.csproj" />
+    <Project Path="src/WriteLike.Infrastructure/WriteLike.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/WriteLike.ArchitectureTests/WriteLike.ArchitectureTests.csproj" />
+    <Project Path="tests/WriteLike.IntegrationTests/WriteLike.IntegrationTests.csproj" />
+    <Project Path="tests/WriteLike.UnitTests/WriteLike.UnitTests.csproj" />
+  </Folder>
+</Solution>

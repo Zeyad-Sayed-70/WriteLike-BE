@@ -1,0 +1,5 @@
+# Banned in EVERY project (see Directory.Build.props wiring).
+# Ban format: <documentation comment ID>;<message shown in the compiler error>
+T:System.Net.WebClient;Use HttpClient from IHttpClientFactory (Infrastructure/Ai typed clients only).
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.

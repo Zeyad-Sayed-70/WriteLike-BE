@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WriteLike.Domain\WriteLike.Domain.csproj" />
+    <ProjectReference Include="..\..\src\WriteLike.Application\WriteLike.Application.csproj" />
+  </ItemGroup>
+
+</Project>

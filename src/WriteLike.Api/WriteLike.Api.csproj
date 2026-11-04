@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- Api: HTTP host. It may reference Application (use cases/ports/DTOs) and
+       Composition (one AddWriteLike() call). It physically CANNOT see Infrastructure
+       or Ai types: no direct reference + transitive references are disabled. -->
+  <ItemGroup>
+    <AdditionalFiles Include="BannedSymbols.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WriteLike.Application\WriteLike.Application.csproj" />
+    <ProjectReference Include="..\WriteLike.Composition\WriteLike.Composition.csproj" />
+  </ItemGroup>
+
+</Project>

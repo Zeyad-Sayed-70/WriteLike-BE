@@ -1,0 +1,10 @@
+# Banned in Api — endpoints go through Application use cases/ports. Direct DB/cache access is a compile error.
+# Api cannot even see WriteLike.Ai / WriteLike.Infrastructure types: no project reference exists and
+# transitive references are disabled. These bans guard against someone adding the packages/references.
+
+T:Microsoft.EntityFrameworkCore.DbContext;Api never touches EF. Go through Application use cases/ports.
+T:Microsoft.EntityFrameworkCore.DbSet`1;Api never touches EF.
+T:StackExchange.Redis.ConnectionMultiplexer;Api never touches Redis. Counters/session state are behind Application ports.
+T:StackExchange.Redis.IDatabase;Api never touches Redis.
+T:Newtonsoft.Json.JsonConvert;This repo uses System.Text.Json only.
+T:Newtonsoft.Json.JsonSerializer;This repo uses System.Text.Json only.

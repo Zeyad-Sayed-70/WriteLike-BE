@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  enforce:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:10.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore (locked — dependency graph cannot drift)
+        run: dotnet restore WriteLike.slnx --locked-mode
+
+      - name: Build (warnings are errors)
+        run: dotnet build WriteLike.slnx -c Release --no-restore
+
+      - name: Formatting (verify only — no format fixes allowed to slip in)
+        run: dotnet format WriteLike.slnx --verify-no-changes
+
+      - name: Test (unit + integration + ARCHITECTURE RULES)
+        run: dotnet test WriteLike.slnx -c Release --no-build

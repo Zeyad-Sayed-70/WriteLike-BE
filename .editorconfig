@@ -1,0 +1,30 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.cs]
+# Style choices enforced at build time via EnforceCodeStyleInBuild
+csharp_style_namespace_declarations = file_scoped:suggestion
+csharp_preferred_modifier_order = public,private,internal,protected,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:silent
+
+# ConfigureAwait is not required on ASP.NET Core / modern app code
+dotnet_diagnostic.CA2007.severity = none
+
+# Test methods may use underscores (Arrange_Act_Expect convention) — deliberate, scoped suppression
+[tests/**/*{.cs}]
+dotnet_diagnostic.CA1707.severity = none
+
+[*.{xml,props,config}]
+indent_size = 2
+
+[*.{yml,yaml,json,md,txt}]
+indent_size = 2
+
+[*.csproj]
+indent_size = 2

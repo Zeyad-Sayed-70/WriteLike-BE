@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Application: use cases + ports (interfaces). No EF, no Redis, no HTTP, no ASP.NET. -->
+  <ItemGroup>
+    <AdditionalFiles Include="BannedSymbols.txt" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WriteLike.Domain\WriteLike.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

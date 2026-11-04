@@ -1,0 +1,72 @@
+<Project>
+
+  <!--
+    WriteLike — build-system guardrails.
+    This file is protected by CODEOWNERS: every change needs human review.
+    AI agents: do not edit. If a rule here blocks your change, report it — do not weaken it.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Mechanical quality floor: anything the analyzer dislikes stops the build -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!-- Every project reference must be declared explicitly, per project.
+         Referencing Application does NOT silently give you Domain.
+         This is what makes the dependency matrix real instead of advisory. -->
+    <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
+
+    <!-- Lock the dependency graph: lockfiles are committed, CI restores in locked mode,
+         so package versions cannot drift without a human-visible diff. -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <!-- Every project gets the banned-API analyzer and the repo-wide ban list -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" />
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)build/BannedSymbols.Global.txt" />
+  </ItemGroup>
+  <!--
+    The dependency matrix, enforced at BUILD time: even a declared-but-unused
+    forbidden ProjectReference fails the build. Test projects are exempt
+    (they may reference everything). Agents: never add references outside
+    the AGENTS.md table — the build will reject them.
+  -->
+  <Target Name="EnforceReferenceMatrix" BeforeTargets="BeforeCompile">
+    <ItemGroup>
+      <!-- Domain: nothing -->
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Domain' AND '%(Filename)' == 'WriteLike.Application'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Domain' AND '%(Filename)' == 'WriteLike.Ai'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Domain' AND '%(Filename)' == 'WriteLike.Infrastructure'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Domain' AND '%(Filename)' == 'WriteLike.Composition'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Domain' AND '%(Filename)' == 'WriteLike.Api'" />
+      <!-- Application: Domain only -->
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Application' AND '%(Filename)' == 'WriteLike.Ai'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Application' AND '%(Filename)' == 'WriteLike.Infrastructure'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Application' AND '%(Filename)' == 'WriteLike.Composition'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Application' AND '%(Filename)' == 'WriteLike.Api'" />
+      <!-- Ai: Domain + Application only -->
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Ai' AND '%(Filename)' == 'WriteLike.Infrastructure'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Ai' AND '%(Filename)' == 'WriteLike.Composition'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Ai' AND '%(Filename)' == 'WriteLike.Api'" />
+      <!-- Infrastructure: Domain + Application only -->
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Infrastructure' AND '%(Filename)' == 'WriteLike.Ai'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Infrastructure' AND '%(Filename)' == 'WriteLike.Composition'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Infrastructure' AND '%(Filename)' == 'WriteLike.Api'" />
+      <!-- Composition: everything except Api -->
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Composition' AND '%(Filename)' == 'WriteLike.Api'" />
+      <!-- Api: Application + Composition only -->
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Api' AND '%(Filename)' == 'WriteLike.Domain'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Api' AND '%(Filename)' == 'WriteLike.Ai'" />
+      <ReferenceViolation Include="@(ProjectReference)" Condition="'$(MSBuildProjectName)' == 'WriteLike.Api' AND '%(Filename)' == 'WriteLike.Infrastructure'" />
+    </ItemGroup>
+    <Error Condition="'@(ReferenceViolation)' != ''"
+           Text="ARCHITECTURE VIOLATION: $(MSBuildProjectName) must not reference @(ReferenceViolation->'%(Filename)', ', ') — see the dependency matrix in AGENTS.md. Move the code to the correct project instead of adding the reference." />
+  </Target>
+
+</Project>

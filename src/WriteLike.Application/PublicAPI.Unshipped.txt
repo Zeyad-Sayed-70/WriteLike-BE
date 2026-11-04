@@ -1,0 +1,56 @@
+#nullable enable
+WriteLike.Application.Abstractions.GenerationPlan
+WriteLike.Application.Abstractions.GenerationPlan.Blocks.get -> System.Collections.Generic.IReadOnlyList<WriteLike.Application.Abstractions.PlannedBlock!>!
+WriteLike.Application.Abstractions.GenerationPlan.Blocks.init -> void
+WriteLike.Application.Abstractions.GenerationPlan.GenerationPlan(WriteLike.Domain.Ai.GenerationSessionId SessionId, System.Collections.Generic.IReadOnlyList<WriteLike.Application.Abstractions.PlannedBlock!>! Blocks) -> void
+WriteLike.Application.Abstractions.GenerationPlan.SessionId.get -> WriteLike.Domain.Ai.GenerationSessionId
+WriteLike.Application.Abstractions.GenerationPlan.SessionId.init -> void
+WriteLike.Application.Abstractions.GenerationRequest
+WriteLike.Application.Abstractions.GenerationRequest.GenerationRequest(WriteLike.Domain.Personas.PersonaId PersonaId, string! UserPrompt) -> void
+WriteLike.Application.Abstractions.GenerationRequest.PersonaId.get -> WriteLike.Domain.Personas.PersonaId
+WriteLike.Application.Abstractions.GenerationRequest.PersonaId.init -> void
+WriteLike.Application.Abstractions.GenerationRequest.UserPrompt.get -> string!
+WriteLike.Application.Abstractions.GenerationRequest.UserPrompt.init -> void
+WriteLike.Application.Abstractions.PlannedBlock
+WriteLike.Application.Abstractions.PlannedBlock.PlannedBlock(string! Title, string! Purpose, bool RequiresUserInput) -> void
+WriteLike.Application.Abstractions.PlannedBlock.Purpose.get -> string!
+WriteLike.Application.Abstractions.PlannedBlock.Purpose.init -> void
+WriteLike.Application.Abstractions.PlannedBlock.RequiresUserInput.get -> bool
+WriteLike.Application.Abstractions.PlannedBlock.RequiresUserInput.init -> void
+WriteLike.Application.Abstractions.PlannedBlock.Title.get -> string!
+WriteLike.Application.Abstractions.PlannedBlock.Title.init -> void
+WriteLike.Application.Abstractions.TextNotification
+WriteLike.Application.Abstractions.TextNotification.OccurredAt.get -> System.DateTimeOffset
+WriteLike.Application.Abstractions.TextNotification.OccurredAt.init -> void
+WriteLike.Application.Abstractions.TextNotification.Reason.get -> string!
+WriteLike.Application.Abstractions.TextNotification.Reason.init -> void
+WriteLike.Application.Abstractions.TextNotification.TextId.get -> WriteLike.Domain.Texts.TextId
+WriteLike.Application.Abstractions.TextNotification.TextId.init -> void
+WriteLike.Application.Abstractions.TextNotification.TextNotification(WriteLike.Domain.Texts.TextId TextId, string! Reason, System.DateTimeOffset OccurredAt) -> void
+WriteLike.Application.AssemblyReference
+WriteLike.Application.AssemblyReference.AssemblyReference() -> void
+WriteLike.Application.Features.Personas.GetPersonaHandler
+WriteLike.Application.Features.Personas.GetPersonaHandler.GetPersonaHandler(WriteLike.Application.Ports.IPersonaRepository! personas) -> void
+WriteLike.Application.Features.Personas.GetPersonaHandler.HandleAsync(WriteLike.Application.Features.Personas.GetPersonaQuery! query, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<WriteLike.Application.Features.Personas.PersonaDto?>!
+WriteLike.Application.Features.Personas.GetPersonaQuery
+WriteLike.Application.Features.Personas.GetPersonaQuery.GetPersonaQuery(WriteLike.Domain.Personas.PersonaId PersonaId) -> void
+WriteLike.Application.Features.Personas.GetPersonaQuery.PersonaId.get -> WriteLike.Domain.Personas.PersonaId
+WriteLike.Application.Features.Personas.GetPersonaQuery.PersonaId.init -> void
+WriteLike.Application.Features.Personas.PersonaDto
+WriteLike.Application.Features.Personas.PersonaDto.Id.get -> WriteLike.Domain.Personas.PersonaId
+WriteLike.Application.Features.Personas.PersonaDto.Id.init -> void
+WriteLike.Application.Features.Personas.PersonaDto.Kind.get -> WriteLike.Domain.Personas.PersonaKind
+WriteLike.Application.Features.Personas.PersonaDto.Kind.init -> void
+WriteLike.Application.Features.Personas.PersonaDto.Name.get -> string!
+WriteLike.Application.Features.Personas.PersonaDto.Name.init -> void
+WriteLike.Application.Features.Personas.PersonaDto.PersonaDto(WriteLike.Domain.Personas.PersonaId Id, string! Name, WriteLike.Domain.Personas.PersonaKind Kind) -> void
+WriteLike.Application.Ports.IAiGenerationOrchestrator
+WriteLike.Application.Ports.IAiGenerationOrchestrator.GenerateBlockAsync(WriteLike.Application.Abstractions.GenerationPlan! plan, int blockIndex, string? userAnswer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<string!>!
+WriteLike.Application.Ports.IAiGenerationOrchestrator.PlanAsync(WriteLike.Application.Abstractions.GenerationRequest! request, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<WriteLike.Application.Abstractions.GenerationPlan!>!
+WriteLike.Application.Ports.ILikeCounterService
+WriteLike.Application.Ports.ILikeCounterService.IncrementAsync(WriteLike.Domain.Texts.TextId textId, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<long>!
+WriteLike.Application.Ports.ILikeCounterService.ReadAsync(WriteLike.Domain.Texts.TextId textId, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<long>!
+WriteLike.Application.Ports.INotificationDispatcher
+WriteLike.Application.Ports.INotificationDispatcher.DispatchAsync(WriteLike.Application.Abstractions.TextNotification! notification, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task!
+WriteLike.Application.Ports.IPersonaRepository
+WriteLike.Application.Ports.IPersonaRepository.FindAsync(WriteLike.Domain.Personas.PersonaId id, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<WriteLike.Domain.Personas.Persona?>!
